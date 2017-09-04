@@ -1,0 +1,6 @@
+Esta primera versión no cuenta con partición de la bandera,
+unicamente es la bandera francesa sola... tampoco esta como
+hilos, tiene un ciclo FOR que controla cada iteración de
+chequeo de estado en cada célula.
+
+Pero funciona. Eider.

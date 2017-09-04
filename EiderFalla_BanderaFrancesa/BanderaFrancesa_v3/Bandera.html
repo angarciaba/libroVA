@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE>Bandera Francesa: CA Unidimensional</TITLE>
+</HEAD>
+<BODY background="../bg.gif" BgColor="#AACCCC">
+
+<FONT face="Verdana">
+<CENTER><H1>
+<IMG SRC="../BanderaFrancesa.jpg" width="48" height="31">
+<FONT color="#0000CC">Bande</FONT>
+<FONT color="#CCCCCC">ra Fra</FONT>
+<FONT color="#CC0000">ncesa</FONT>
+<IMG SRC="../BanderaFrancesa.jpg" width="48" height="31">
+<BR>Con Hilos y Corte</H1><BR>
+<A HREF="../BanderaFrancesa_v1/Bandera.html">[Sin Corte]</A> -
+<A HREF="../BanderaFrancesa_v2/Bandera.html">[Con Corte]</A> -
+<A HREF="../BanderaFrancesa_v3/Bandera.html">[Con Hilos]</A>
+</CENTER>
+
+<HR>
+<P Align="Justify">
+<B><U>Funcinamiento</U>:</B> El ejemplo inserta la perturbaci&oacute;n inicial P autom&aacute;ticamente con un click
+derecho del mouse, otro click derecho detiene y otro m&aacute;s reiniciliza todo el proceso. Un click izquierdo del
+mouse en una c&eacute;lula, mientras el proceso esta vivo, genera una perturbaci&oacute;n y corta la poblaci&oacute;n. La primera l&iacute;nea 
+representa la poblaci&oacute;n de c&eacute;lulas donde deber&aacute; generarse la bandera francesa, las dos &uacute;ltimas 
+l&iacute;neas muestra el cambio que sufre cada c&eacute;lula en cada iteraci&oacute;n.
+<P Align="Justify">
+<B><U>Observaci&oacute;n</U>:</B> Esta nueva aproximaci&oacute;n trabaja con hilos, donde cada c&eacute;lula es un hilo de
+ejecuci&oacute;n independiente que revisa constantemente su estado y el de sus vecinos 
+(izquierdo y derecho). Debe esperar un poco mientras todas las c&eacute;lulas son creadas e
+inicializadas para despu&eacute;s iniciar su proceso.
+
+<P>
+<HR>
+<CENTER><APPLET CODE=BanderaFrancesa WIDTH=450 HEIGHT=150></APPLET></CENTER>
+<HR>
+
+<A HREF="../BanderaFrancesa_v2/Bandera.html">[Anterior]</A> -
+<A HREF="../BanderaFrancesa.html">[Inicio]</A>- 
+C&oacute;digo Fuente: 
+<A HREF="BanderaFrancesa.java">[Bandera]</A> -
+<A HREF="vecCelulas.java">[Poblaci&oacute;n]</A> -
+<A HREF="Celula.java">[Celula]</A>
+</FONT>
+</BODY>
+</HTML>

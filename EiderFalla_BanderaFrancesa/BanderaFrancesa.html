@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<TITLE>Automatas Celulares Unidimensionales: Bandera Francesa</TITLE>
+</HEAD>
+<BODY background="bg.gif" BgColor="#AACCCC">
+
+<FONT face="Verdana">
+<CENTER><H1>
+<IMG SRC="BanderaFrancesa.jpg" width="48" height="31">
+<FONT color="#0000CC">Bande</FONT>
+<FONT color="#CCCCCC">ra Fra</FONT>
+<FONT color="#CC0000">ncesa</FONT>
+<IMG SRC="BanderaFrancesa.jpg" width="48" height="31">
+</H1><BR>
+<A HREF="./BanderaFrancesa_v1/Bandera.html">[Sin Corte]</A> -
+<A HREF="./BanderaFrancesa_v2/Bandera.html">[Con Corte]</A> -
+<A HREF="./BanderaFrancesa_v3/Bandera.html">[Con Hilos]</A>
+</CENTER>
+<HR>
+
+<P Align="Justify">
+<B><U>Problema</U>:</B> Tenemos un CA lineal e isotr&oacute;pico, inicializado con un segmento de
+c&eacute;lulas en el mismo estado I, y donde cada c&eacute;lula exhibe un color que
+depende de su estado (estados distintos pueden tener el mismo color). A partir de una
+perturbaci&oacute;n inicial P en uno de los extremos, debe desarrollarse la bandera
+francesa: un tercio rojo, un tercio blanco, un tercio azul.
+
+<P Align="Justify">
+<B><U>Soluci&oacute;n</U>:</B> Definimos los estados: <BR>
+<DIR>
+<LI> <B>#</B>: estado quiescente del entorno. <BR>
+<LI> <B>I</B>: estado inicial del segmento. <BR>
+<LI> <B>P</B>: perturbaci&oacute;n inicial. <BR>
+<LI> <FONT color="#CC0000"><B>R</B></FONT>: Rojo. <BR>
+<LI> <FONT color="#FFFFFF"><B>B</B></FONT>: Blanco. <BR>
+<LI> <FONT color="#0000CC"><B>A</B></FONT>: Azul. <BR>
+</DIR>
+Se parte de un segmento contiguo de c&eacute;lulas en estado <I>I</I>, con un extremo en
+estado <I>P</I> y rodeadas de todas las dem&aacute;s c&eacute;lulas en estado <I>#</I>.
+
+<P Align="Justify">
+Se introducen estados adicionales para propagar la coloraci&oacute;n:<BR>
+<DIR>
+<LI> <FONT color="#0000CC"><B>Z</B></FONT>: frente azul. Velocidad = 1 c&eacute;lula por ciclo. <BR>
+<LI> <FONT color="#FFFFFF"><B>N</B></FONT>: frente blanco. Velocidad = 1 c&eacute;lula por cada 2 ciclos. <BR>
+<LI> <FONT color="#CC0000"><B>J</B></FONT>: frente rojo. Velocidad = 1 c&eacute;lula por cada 5 ciclos. <BR>
+<LI> <B>E</B>: estabilizador. Velocidad = 1 c&eacute;lula por ciclo. <BR>
+</DIR>
+Z, N y J se generan a partir de la ocurrencia de P. Para lograr la velocidad 
+requerida, se desdobla N en {N1, N0} y J en {J4, J3, J2, J1, J0}, que acturar&aacute;n 
+a manera de contadores.
+
+<P Align="Justify">
+<B><U>Diagrama de Estados</B>:</U><BR>
+<CENTER><TABLE BORDER=1 BgColor="#EEEEEE">
+<TR><TD><B><CENTER>Actual</CENTER></B></TD><TD><B><CENTER>Izquierda</CENTER></B></TD><TD><B><CENTER>Derecha</CENTER></B></TD><TD><B><CENTER>Siguiente</CENTER></B></TD></TR>
+<TR><TD>P</TD><TD>*</TD><TD>*</TD><TD>Z</TD></TR>
+<TR><TD>I</TD><TD><>Z</TD><TD>*</TD><TD>I</TD></TR>
+<TR><TD>I</TD><TD>Z</TD><TD>*</TD><TD>Z</TD></TR>
+<TR><TD>Z</TD><TD><>(N1,#)</TD><TD>*</TD><TD>Z</TD></TR>
+<TR><TD>Z</TD><TD>#</TD><TD>*</TD><TD>N0</TD></TR>
+<TR><TD>Z</TD><TD>N1</TD><TD>*</TD><TD>N0</TD></TR>
+<TR><TD>Z</TD><TD>*</TD><TD>#</TD><TD>A</TD></TR>
+<TR><TD>Z</TD><TD>*</TD><TD>A</TD><TD>A</TD></TR>
+<TR><TD>N0</TD><TD>#</TD><TD>N0</TD><TD>J0</TD></TR>
+<TR><TD>N0</TD><TD>J4</TD><TD>*</TD><TD>J0</TD></TR>
+<TR><TD>N0</TD><TD><>(J4,#)</TD><TD>*</TD><TD>N1</TD></TR>
+<TR><TD>N0</TD><TD>#</TD><TD>Z</TD><TD>N1</TD></TR>
+<TR><TD>N1</TD><TD>J4</TD><TD>*</TD><TD>J0</TD></TR>
+<TR><TD>N1</TD><TD><>J4</TD><TD>*</TD><TD>N0</TD></TR>
+<TR><TD>N0,N1</TD><TD>*</TD><TD>A</TD><TD>B</TD></TR>
+<TR><TD>N0,N1</TD><TD>*</TD><TD>B</TD><TD>B</TD></TR>
+<TR><TD>J0</TD><TD>*</TD><TD>*</TD><TD>J1</TD></TR>
+<TR><TD>J1</TD><TD>*</TD><TD>*</TD><TD>J2</TD></TR>
+<TR><TD>J2</TD><TD>*</TD><TD>*</TD><TD>J3</TD></TR>
+<TR><TD>J3</TD><TD>*</TD><TD>*</TD><TD>J4</TD></TR>
+<TR><TD>J4</TD><TD>*</TD><TD>*</TD><TD>J1</TD></TR>
+<TR><TD>J0-J4</TD><TD>*</TD><TD>B</TD><TD>R</TD></TR>
+<TR><TD>J0-J4</TD><TD>*</TD><TD>R</TD><TD>R</TD></TR>
+</TABLE></CENTER>
+
+<P Align="Justify">
+Para poder realizar un corte a la bandera y que esta vuelva a generarse en 
+cada segmento que haya quedado, se deben introducir y cambiar algunos de los
+estados, de la siguiente forma:<BR>
+<CENTER><B><U>Segmento de la Derecha</U>:</B><BR>
+<TABLE BORDER=1  BgColor="#EEEEEE">
+<TR><TD><B><CENTER>Actual</CENTER></B></TD><TD><B><CENTER>Izquierda</CENTER></B></TD><TD><B><CENTER>Derecha</CENTER></B></TD><TD><B><CENTER>Siguiente</CENTER></B></TD></TR>
+<TR><TD>A</TD><TD>P</TD><TD>*</TD><TD>I</TD></TR>
+<TR><TD>A</TD><TD>I</TD><TD>*</TD><TD>I</TD></TR>
+<TR><TD>B</TD><TD>P</TD><TD>*</TD><TD>I</TD></TR>
+<TR><TD>B</TD><TD>I</TD><TD>*</TD><TD>I</TD></TR>
+<TR><TD>R</TD><TD>P</TD><TD>*</TD><TD>I</TD></TR>
+<TR><TD>R</TD><TD>I</TD><TD>*</TD><TD>I</TD></TR>
+</TABLE><BR>
+<B><U>Segmento de la Izquierda</U>:</B><BR>
+<TABLE BORDER=1  BgColor="#EEEEEE">
+<TR><TD><B><CENTER>Actual</CENTER></B></TD><TD><B><CENTER>Izquierda</CENTER></B></TD><TD><B><CENTER>Derecha</CENTER></B></TD><TD><B><CENTER>Siguiente</CENTER></B></TD></TR>
+<TR><TD>A</TD><TD>*</TD><TD>P</TD><TD>I</TD></TR>
+<TR><TD>A</TD><TD>*</TD><TD>I</TD><TD>I</TD></TR>
+<TR><TD>B</TD><TD>*</TD><TD>P</TD><TD>I</TD></TR>
+<TR><TD>B</TD><TD>*</TD><TD>I</TD><TD>I</TD></TR>
+<TR><TD>R</TD><TD>*</TD><TD>P</TD><TD>I</TD></TR>
+<TR><TD>R</TD><TD><>#</TD><TD>I</TD><TD>I</TD></TR>
+<TR><TD>R</TD><TD>#</TD><TD>I</TD><TD>P</TD></TR>
+<TR><TD>P</TD><TD><>#</TD><TD>#</TD><TD>I</TD></TR>
+</TABLE></CENTER>
+
+<P Align="Justify">
+<B><U>Autor</U>:</B> Eider J. Falla<BR>
+<B><U>C&oacute;digo</U>:</B> 9419104<BR>
+
+<HR>
+<P Align="Center">
+<A HREF="http://www.univalle.edu.co"><B><U>Universidad del Valle</U></B></A><BR>
+<B><U>Escuela de Ingenieria de Sistemas</U></B><BR>
+<B><U>Computaci&oacute;n Evolutiva</U></B><BR>
+<B><U>Cali - 2001</U></B><BR>
+
+<P>
+<HR>
+<A HREF="./BanderaFrancesa_v1/Bandera.html">[Sin Corte]</A> -
+<A HREF="./BanderaFrancesa_v2/Bandera.html">[Con Corte]</A> -
+<A HREF="./BanderaFrancesa_v3/Bandera.html">[Con Hilos]</A>
+</FONT>
+</BODY>
+</HTML>
